@@ -10,7 +10,13 @@ function App() {
     return (
         <Container maxWidth='md'
             sx={{
-                bgcolor: 'Azure',
+                background: 'linear-gradient(-45deg, pink 20%, Lavender 80%)',
+                borderRadius: '20px',
+                boxShadow: '0 0px 10px 0px gray',
+                width: '40%',
+                minWidth: '380px',
+                height: '380px',
+                marginTop: '6%',
             }}
         >
 

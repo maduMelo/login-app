@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { Box, Button, Step, StepLabel, Stepper, Typography } from '@mui/material';
-import PersonalInfo from './PersonalInfo';
 
-const steps = ['Informações Pessoais', 'Endereço', 'Detalhes de Login'];
+import PersonalInfo from './PersonalInfo';
+import Details from './Details';
+import LoginSetting from './LoginSetting';
+
+const steps = ['General', 'Profile', 'Account'];
 
 function StepContent({ step }) {
     switch (step) {
         case 0:
             return <PersonalInfo />;
         case 1:
-            return <Typography>Formulário de Endereço</Typography>;
+            return <Details />;
         case 2:
-            return <Typography>Formulário de Detalhes de Login</Typography>;
+            return <LoginSetting />;
         default:
             return <Typography>Passo desconhecido</Typography>;
     };
@@ -33,7 +36,17 @@ export default function SingInStepper() {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box 
+            sx={{ 
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                height: '65vh',
+
+                
+            }}
+        >
             <Stepper activeStep={activeStep}>
                 {steps.map((label, index) => (
                     <Step key={index}>
@@ -41,7 +54,12 @@ export default function SingInStepper() {
                     </Step>
                 ))}
             </Stepper>
-            <Box sx={{ mt: 4}}>
+            <Box 
+                sx={{ 
+                    mt: 0,
+                    
+                }}
+            >
                 {activeStep === steps.length ? (
                     <Box>
                         <Typography>Cadastro concluído com sucesso!</Typography>
@@ -50,7 +68,7 @@ export default function SingInStepper() {
                 ) : (
                     <Box>
                         <StepContent step={activeStep} />
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                        <Box sx={{ display: 'flex', pt: 2 }}>
                             <Button
                                 color="inherit"
                                 disabled={activeStep === 0}
