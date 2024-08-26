@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { Container, Box } from '@mui/material';
 
 import SingInStepper from './components/SingInStepper';
@@ -15,7 +13,7 @@ function App() {
                 boxShadow: '0 0px 10px 0px gray',
                 width: '40%',
                 minWidth: '380px',
-                height: '380px',
+                minHeight: '380px',
                 marginTop: '6%',
             }}
         >

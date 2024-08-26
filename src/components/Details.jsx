@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { OutlinedInput, InputLabel, MenuItem, FormControl, ListItemText, Select, Checkbox } from '@mui/material';
-import { Chip, Autocomplete } from '@mui/material';
-import { Box, Container, TextField } from '@mui/material';
+import { Box, Autocomplete, TextField } from '@mui/material';
 
 const genres = [
     'Action', 'Adventure', 'Animation', 'Comedy',
@@ -9,14 +7,13 @@ const genres = [
     'Mystery', 'Romance', 'Sci-Fi', 'Thriller',
 ];
 
-const platforms = ['Netflix', 'Amazon Prime', 'Disney+', 'HBO Max', 'Hulu', 'Paramount+', 'Apple TV+', 'Theaters'];
+const platforms = ['Amazon Prime', 'Apple TV+', 'Disney+', 'HBO Max', 'Hulu', 'Netflix', 'Paramount+', , 'Theaters'];
 
-export default function Details() {
-    const [personName, setPersonName] = React.useState([]);
+export default function Details({ userData, setUserData }) {
 
-    const handleChange = (event) => {
-        const { target: { value } } = event;
-        setPersonName(typeof value === 'string' ? value.split(',') : value);
+    const handleInputChange = (event) => {
+        const { id, value } = event.target;
+        setUserData({ ...userData, [id]: value });
     };
 
     return (
@@ -29,24 +26,28 @@ export default function Details() {
                 gap: '1.5vw',
                 marginTop: '-52vh',
                 height: '40vh',
+                minHeight: '200px',
                 //bgcolor: 'rgba(255, 255, 255, 0.5)',
             }}
         >
             <TextField
-                id="outlined-basic"
+                id="moviesPerWeek"
                 label="Movies per week"
                 type='number'
                 variant="standard"
                 size='small'
                 sx={{ width: '80%' }}
+
+                value={userData.moviesPerWeek}
+                onChange={handleInputChange}
             />
 
             <Autocomplete
                 sx={{ width: '80%' }}
                 size='small'
                 multiple
-                id="tags-standard"
-                options={platforms}
+                id="platforms"
+
                 renderInput={(params) => (
                     <TextField
                         {...params}
@@ -54,14 +55,18 @@ export default function Details() {
                         label="Main platforms"
                     />
                 )}
+
+                options={platforms}
+                value={userData.platforms}
+                onChange={ (event, newValue) => setUserData({ ...userData, platforms: newValue }) }
             />
 
             <Autocomplete
                 sx={{ width: '80%' }}
                 size='small'
                 multiple
-                id="tags-standard"
-                options={genres}
+                id="genres"
+
                 renderInput={(params) => (
                     <TextField
                         {...params}
@@ -69,6 +74,10 @@ export default function Details() {
                         label="Favorite genres"
                     />
                 )}
+
+                options={genres}
+                value={userData.genres}
+                onChange={ (event, newValue) => setUserData({ ...userData, genres: newValue }) }
             />
         </Box>
 
