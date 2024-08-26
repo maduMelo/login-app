@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Box, Button, Step, StepLabel, Stepper, Typography } from '@mui/material';
+import { Link as LinkRouter } from 'react-router-dom';
 
 import PersonalInfo from './PersonalInfo';
 import Details from './Details';
 import LoginSetting from './LoginSetting';
+
+import kitty from '../assets/kitty.gif';
 
 const steps = ['General', 'Profile', 'Account'];
 
@@ -63,9 +66,22 @@ export default function SingInStepper() {
             </Stepper>
             <Box>
                 {activeStep === steps.length ? (
-                    <Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '1vw',
+                            marginTop: '-52vh',
+                            height: '40vh',
+                            minHeight: '200px',
+                            //bgcolor: 'rgba(255, 255, 255, 0.5)',
+                        }}
+                    >   
+                        <Box sx={{ width: '40%', height: '70%', display: 'flex' }} ><img src={kitty} alt="Kitty" /></Box>
                         <Typography>Cadastro concluído com sucesso!</Typography>
-                        <Button onClick={handleReset}>Clear</Button>
+                        <LinkRouter to="/">Login In</LinkRouter>
                     </Box>
                 ) : (
                     <Box>

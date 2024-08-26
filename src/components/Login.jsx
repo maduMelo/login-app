@@ -1,8 +1,16 @@
-
+import React from "react";
 import { Box, Button, TextField, Link } from "@mui/material";
 import { Link as LinkRouter } from 'react-router-dom';
 
 export default function Login() {
+    const [loginData, setLoginData] = React.useState({ username: '', password: '' });
+
+    const handleInputChange = (event) => {
+        const { id, value } = event.target;
+        setLoginData({ ...loginData, [id]: value });
+    };
+
+    const handleLogin = () => console.log('Login:', loginData);
 
     return (
         <Box
@@ -24,15 +32,26 @@ export default function Login() {
                 size='small'
                 sx={{ width: '80%' }}
 
+                value={loginData.username}
+                onChange={handleInputChange}
             />
 
             <TextField id="password" label="Password" type='password'
                 variant="standard"
                 size='small'
                 sx={{ width: '80%' }}
+
+                value={loginData.password}
+                onChange={handleInputChange}
             />
 
-            <Button variant="contained" m={20} sx={{ width: '80%', marginTop: '4vh' }}>Login</Button>
+            <Button variant="contained" m={20}
+                sx={{ width: '80%', marginTop: '4vh' }}
+                onClick={handleLogin}
+            >
+                Login
+            </Button>
+
             <LinkRouter to="/singup">Don't have an account? Sing up</LinkRouter>
         </Box>
     );
