@@ -9,8 +9,8 @@ app.use(express.json());
 const routes = require('./routes.js');
 app.use('/', routes);
 
-//const connection = require('./connection');
-//connect();
+const connect = require('./db');
+connect();
 
 app.listen(3000, () => console.log('Server running on port 3000'));
 
