@@ -1,7 +1,9 @@
 import { Container, Box } from '@mui/material';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import SingInStepper from './components/SingInStepper';
-
+import Login from './components/Login';
+// <SingInStepper />
 
 function App() {
 
@@ -17,9 +19,13 @@ function App() {
                 marginTop: '6%',
             }}
         >
-
             <Box padding={4} >
-                <SingInStepper />
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Login />} />
+                        <Route path="/singup" element={<SingInStepper />} />
+                    </Routes>
+                </BrowserRouter>
             </Box>
 
         </Container>
