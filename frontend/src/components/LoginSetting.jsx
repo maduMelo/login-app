@@ -25,7 +25,6 @@ export default function DLoginSetting({ userData, setUserData }) {
                 marginTop: '-52vh',
                 height: '40vh',
                 minHeight: '200px',
-                //bgcolor: 'rgba(255, 255, 255, 0.5)',
             }}
         >
             <TextField id="username" label="Username"
