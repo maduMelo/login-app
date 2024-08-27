@@ -74,12 +74,8 @@ const Controller = {
     },
 
     getProfile: async (req, res) => {
-
-        console.log('Entrou no getProfile');
-        console.log('REQ', req.user);
         try {
             const userID = req.user.id;
-            console.log('ID', userID);
 
             const user = await User.findById(userID, '-password');
             console.log('USER', user);

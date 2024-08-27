@@ -63,7 +63,6 @@ export default function SingInStepper() {
                 justifyContent: 'space-between',
                 height: '65vh',
                 minHeight: '320px',
-                //bgcolor: 'rgba(255, 255, 255, 0.5)',
                 
             }}
         >
@@ -86,7 +85,6 @@ export default function SingInStepper() {
                             marginTop: '-52vh',
                             height: '40vh',
                             minHeight: '200px',
-                            //bgcolor: 'rgba(255, 255, 255, 0.5)',
                         }}
                     >   
                         <Box sx={{ width: '40%', height: '70%', display: 'flex' }} ><img src={kitty} alt="Kitty" /></Box>
