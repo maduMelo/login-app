@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Box, Button, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { Link as LinkRouter } from 'react-router-dom';
 
@@ -29,6 +30,7 @@ export default function SingInStepper() {
         moviesPerWeek: null, platforms: [], genres: [],
         username: '', email: '', password: '',
     });
+    const [finalFormMessage, setFinalFormMessage] = useState('');
     const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = () => {
@@ -39,9 +41,17 @@ export default function SingInStepper() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handleReset = () => {
-        console.log(userData);
-        setActiveStep(0);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            await axios.post('http://localhost:3000/signup', userData);
+            setFinalFormMessage('Registration completed successfully!');
+            handleNext();
+        } catch (error) {
+            console.error(error);
+            setFinalFormMessage('Error registering, try again!');
+        }
     };
 
     return (
@@ -80,7 +90,7 @@ export default function SingInStepper() {
                         }}
                     >   
                         <Box sx={{ width: '40%', height: '70%', display: 'flex' }} ><img src={kitty} alt="Kitty" /></Box>
-                        <Typography>Cadastro concluído com sucesso!</Typography>
+                        <Typography>{finalFormMessage}</Typography>
                         <LinkRouter to="/">Login In</LinkRouter>
                     </Box>
                 ) : (
@@ -96,9 +106,11 @@ export default function SingInStepper() {
                                 Back
                             </Button>
                             <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handleNext}>
-                                {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
-                            </Button>
+                            {
+                                activeStep === steps.length - 1 ?
+                                <Button onClick={handleSubmit} variant="contained">Submit</Button> :
+                                <Button onClick={handleNext}>Next</Button>
+                            }
                         </Box>
                     </Box>
                 )}

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import SingInStepper from './components/SingInStepper';
 import Login from './components/Login';
-// <SingInStepper />
+import Profile from './components/Profile';
 
 function App() {
 
@@ -24,6 +24,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Login />} />
                         <Route path="/singup" element={<SingInStepper />} />
+                        <Route path="/profile" element={<Profile />} />
                     </Routes>
                 </BrowserRouter>
             </Box>
