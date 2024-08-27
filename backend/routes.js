@@ -11,13 +11,15 @@ router
 
 
 // POST request for creating a new user
-
-
+router
+    .route('/signup')
+    .post((req, res) => Controller.createAccount(req, res));
 
 
 // POST request for logging in a user
-
-
+router
+    .route('/')
+    .post((req, res) => Controller.loginIntoAccount(req, res));
 
 
 module.exports = router;
