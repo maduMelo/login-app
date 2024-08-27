@@ -10,6 +10,12 @@ router
     .get((req, res) => Controller.getLogin(req, res));
 
 
+// GET request for getting the user's data
+router
+    .route('/profile')
+    .get(Controller.checkToken, (req, res) => Controller.getProfile(req, res));
+
+
 // POST request for creating a new user
 router
     .route('/signup')

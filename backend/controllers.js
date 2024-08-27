@@ -71,6 +71,37 @@ const Controller = {
             res.status(200).json({ message: 'Logged in successfully', token });
 
         } catch (e) { res.status(500).json({ message: e.message }) };
+    },
+
+    getProfile: async (req, res) => {
+
+        console.log('Entrou no getProfile');
+        console.log('REQ', req.user);
+        try {
+            const userID = req.user.id;
+            console.log('ID', userID);
+
+            const user = await User.findById(userID, '-password');
+            console.log('USER', user);
+
+            res.status(200).json(user);
+        }
+        catch (e) { res.status(500).json({ message: e.message }) };
+    },
+
+    checkToken: async (req, res, next) => {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+
+        if (!token) return res.status(401).json({ message: 'Unauthorized' });
+
+        const secret = process.env.TOKEN_SECRET;
+        try {
+            const decoded = jwt.verify(token, secret);
+            req.user = decoded;
+            next(null, decoded);
+        }
+        catch (e) { res.status(403).json({ message: 'Invalid token' }) };
     }
 };
 
